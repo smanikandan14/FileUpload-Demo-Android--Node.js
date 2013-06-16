@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>File Upload Demoe</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap.min.css">
+    <!--[if lt IE 7]><link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-ie6.min.css"><![endif]-->
+    <link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">
+    <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet"> -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+
+    <style type="text/css">
+
+      body {
+        padding-left:60px;
+        padding-right:60px;        
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        padding-bottom: 200px;
+      }
+
+      /* Custom container */
+      .container {
+        margin: 0 auto;
+        max-width: 1000px;
+      }
+      .container > hr {
+        margin: 60px 0;
+      }
+
+      /* Customize the navbar links to be fill the entire space of the .navbar */
+      .navbar .navbar-inner {
+        padding: 0;
+      }
+      .navbar .nav {
+        margin: 0;
+        display: table;
+        width: 100%;
+      }
+      .navbar .nav li {
+        display: table-cell;
+        width: 1%;
+        float: none;
+      }
+      .navbar .nav li a {
+        font-weight: bold;
+        text-align: center;
+        border-left: 1px solid rgba(255,255,255,.75);
+        border-right: 1px solid rgba(0,0,0,.1);
+      }
+      .navbar .nav li:first-child a {
+        border-left: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      .navbar .nav li:last-child a {
+        border-right: 0;
+        border-radius: 0 3px 3px 0;
+      }
+
+    </style>
+    </head>
+  <body>
+    
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"></script>
+    <script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
+    <script src="js/bootstrap-image-gallery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script> 
+    <script src="fetch.js"></script>
+
+      <div class="row">
+
+    <div class="span8">
+      <div class="hero-unit">
+         <h1>File Upload Demo</h1>
+        <p>This demo project explains how you can handle file upload on Node.js using 'formidable' module.Also the demos captures real time update of new images,videos,audios posted from device.Uses 'socket.io' </p>
+        <div class="actions" align="center">
+          <a class="btn btn-large btn-github" href="https://github.com/smanikandan14" target="_blank">
+            <i class="icon-github icon-2x"></i>
+            View Project on GitHub</a>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="span5">
+      <div class="well" style="padding: 8px 0;">
+        <ul id="latest_uploads" class="nav nav-list">
+          
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+      <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+              <li id='1' class="active"> <a href="#"><i class="icon-th-list"></i>All</a></li>
+              <li id='2'> <a href="#"><i class="icon-picture"></i>Images</a></li>
+              <li id='3'> <a href="#"><i class="icon-facetime-video"></i>Videos</a></li>
+              <li id='4'> <a href="#"><i class="icon-headphones"></i>Audio</a></li>
+              <li id='5'> <a href="#"><i class="icon-filter"></i>By Name</a></li>
+              </ul>
+            </div>
+      </div><!-- /.navbar -->
+
+      <div id="progress" align="center">
+        <i class="icon-spinner icon-spin icon-2x icon-large"></i> 
+      </div>
+      
+      
+
+      <!-- https://github.com/blueimp/Bootstrap-Image-Gallery -->
+      <div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
+          <div class="modal-header">
+              <a class="close" data-dismiss="modal">&times;</a>
+              <h3 class="modal-title"></h3>
+          </div>
+          <div class="modal-body"><div class="modal-image"></div></div>
+          <div class="modal-footer">
+              <a class="btn modal-download" target="_blank"><i class="icon-download"></i> Download</a>
+          </div>
+      </div>
+
+      <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
+           <ol id="gallery_ul" class="thumbnails"/>
+      </div>
+      
+      <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel"></h3>
+        </div>
+        <div class="modal-body">
+          <div id="modalContent">
+
+        </div>
+        </div>
+      </div>
+
+  </body>
+</html>
